@@ -32,3 +32,9 @@ yarn-error.log*
 .vercel
 
 .env
+.vscode
+/vscode
+.idea
+/idea
+/.next
+
