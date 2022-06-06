@@ -12,7 +12,7 @@ function App() {
        <BlogContent />
      </main>
 
-      <Footer />
+      <Footer year={new Date().getFullYear()}/>
     </>
   );
 }
