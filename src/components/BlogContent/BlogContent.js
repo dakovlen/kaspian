@@ -4,24 +4,36 @@ import "./BlogContent.css";
 import { BlogCard } from "./components/BlogCard";
 
 export class BlogContent extends Component {
+  state = {
+    blogArr: posts
+  }
   
-  blogPosts = posts.map((item) => {
-    return (
-      <BlogCard 
-        key={item.id}
-        title={item.title}
-        description={item.description}
-      />
-    );
-  });
+  likePost = pos => {
+    const temp =this.state.blogArr;
+    temp[pos].likeCount++
 
+    this.setState({
+      blogArr: temp
+    })
+  }
 
   render() {
+    const blogPosts = this.state.blogArr.map((item, pos) => {
+      return (
+        <BlogCard 
+          key={item.id}
+          title={item.title}
+          description={item.description}
+          likeCount={item.likeCount}
+          likePost={() => this.likePost(pos)}
+        />
+      );
+    });
     return (
       <>
         <h1>Simple Blog</h1>
         <div className="posts">
-          {this.blogPosts}
+          {blogPosts}
         </div>
       </>
     );
