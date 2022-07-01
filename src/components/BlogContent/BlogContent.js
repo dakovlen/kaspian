@@ -5,16 +5,18 @@ import { BlogCard } from "./components/BlogCard";
 
 export class BlogContent extends Component {
   state = {
-    blogArr: posts
+    blogArr: JSON.parse(localStorage.getItem('blogPosts')) || posts
   }
   
   likePost = pos => {
-    const temp =this.state.blogArr;
-    temp[pos].likeCount++
+    const temp = [...this.state.blogArr];
+    temp[pos].liked = !temp[pos].liked
 
     this.setState({
       blogArr: temp
     })
+
+    localStorage.setItem('blogPosts', JSON.stringify(temp))
   }
 
   render() {
@@ -24,7 +26,7 @@ export class BlogContent extends Component {
           key={item.id}
           title={item.title}
           description={item.description}
-          likeCount={item.likeCount}
+          liked={item.liked}
           likePost={() => this.likePost(pos)}
         />
       );
